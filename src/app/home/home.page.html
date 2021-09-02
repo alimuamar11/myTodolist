@@ -1,20 +1,59 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-item lines="none">
+      <ion-label style="font-weight: 700;font-size: 2em;">
+        TODAY
+        <p style="font-weight: 400; color: blue;">
+          {{today | date: 'fullDate'}}
+          <!-- inisialisasi today ada di ts -->
+        </p>
+      </ion-label>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card *ngFor="let item of todoList">
+    <ion-card-header>
+      <ion-card-subtittle
+        [style.color]="item.itemPriority === 'high' ? 'red' : (item.itemPriority === 'low' ? 'green' : 'orange') ">
+        {{item.itemCategory}}
+      </ion-card-subtittle>
+      <!-- *ngFor untuk perulangan *ngIf untuk kondisi, kayanya :D  -->
+      <ion-item>
+        <ion-icon *ngIf="item.itemPriority ==='high' " color="danger" size="small" name="ellipse"></ion-icon>
+        <ion-icon *ngIf="item.itemPriority ==='low' " color="success" size="small" name="ellipse"></ion-icon>
+        <ion-icon *ngIf="item.itemPriority ==='middle' " color="warning" size="small" name="ellipse"></ion-icon>
+        <ion-label>
+          {{item.itemName}}
+        </ion-label>
+      </ion-item>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label>Due {{item.itemDueDate | date:'fullDate'}}</ion-label>
+      <!-- sama konsep dengan date diatas, hanya ini dinamic dari itemDueDate -->
+    </ion-card-content>
+
+    <ion-row>
+      <ion-item>
+        <ion-icon name="share-outline"></ion-icon>
+        <p>Share</p>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="checkmark-outline"></ion-icon>
+        <p>Complete</p>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="trash-outline"></ion-icon>
+        <p>Cencel</p>
+      </ion-item>
+    </ion-row>
+  </ion-card>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <!-- button default di kiri bawah,vrtical bottom ke bawah horizontal end agar ke kanan slot fixed agar tidak bergeser ketika scroll -->
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
