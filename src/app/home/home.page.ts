@@ -9,30 +9,17 @@ import { AddNewTaskPage } from '../add-new-task/add-new-task.page';
 })
 export class HomePage {
 
-  todoList = [{
-    itemName: 'Coding',
-    itemDueDate: '10-10-2021',
-    itemPriority: 'low',
-    itemCategory: 'Work'
-  },
-  {
-    itemName: 'Traveling',
-    itemDueDate: '12-12-2021',
-    itemPriority: 'high',
-    itemCategory: 'Refreshing'
-  },
-  {
-    itemName: 'Joging',
-    itemDueDate: '12-16-2021',
-    itemPriority: 'middle',
-    itemCategory: 'Mentallity'
-  }
-  ]
+  todoList = []
   today: number = Date.now()
   constructor(public modalCtrls: ModalController) { }
   async tambah() {
     const modal = await this.modalCtrls.create({
       component: AddNewTaskPage
+    })
+    modal.onDidDismiss().then(newTaskObj => {
+      // console.log(newTaskObj.data)
+      this.todoList.push(newTaskObj.data)
+
     })
     return await modal.present()
   }

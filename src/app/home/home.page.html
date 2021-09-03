@@ -15,15 +15,15 @@
 <ion-content [fullscreen]="true">
   <ion-card *ngFor="let item of todoList">
     <ion-card-header>
-      <ion-card-subtittle
-        [style.color]="item.itemPriority === 'high' ? 'red' : (item.itemPriority === 'low' ? 'green' : 'orange') ">
+      <ion-card-subtitle
+        [style.color]="item.itemPriority === 'High' ? 'red' : (item.itemPriority === 'Low' ? 'green' : 'orange') ">
         {{item.itemCategory}}
-      </ion-card-subtittle>
+      </ion-card-subtitle>
       <!-- *ngFor untuk perulangan *ngIf untuk kondisi, kayanya :D  -->
       <ion-item>
-        <ion-icon *ngIf="item.itemPriority ==='high' " color="danger" size="small" name="ellipse"></ion-icon>
-        <ion-icon *ngIf="item.itemPriority ==='low' " color="success" size="small" name="ellipse"></ion-icon>
-        <ion-icon *ngIf="item.itemPriority ==='middle' " color="warning" size="small" name="ellipse"></ion-icon>
+        <ion-icon *ngIf="item.itemPriority ==='High' " color="danger" size="small" name="ellipse"></ion-icon>
+        <ion-icon *ngIf="item.itemPriority ==='Low' " color="success" size="small" name="ellipse"></ion-icon>
+        <ion-icon *ngIf="item.itemPriority ==='Middle' " color="warning" size="small" name="ellipse"></ion-icon>
         <ion-label>
           {{item.itemName}}
         </ion-label>
@@ -31,7 +31,7 @@
 
     </ion-card-header>
     <ion-card-content>
-      <ion-label>Due {{item.itemDueDate | date:'fullDate'}}</ion-label>
+      <ion-label>Due date : <br> {{item.itemDueDate | date:'fullDate'}}</ion-label>
       <!-- sama konsep dengan date diatas, hanya ini dinamic dari itemDueDate -->
     </ion-card-content>
 
