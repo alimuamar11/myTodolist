@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { homedir } from 'os';
+import { TodoService } from '../todo.service';
 
 @Component({
   selector: 'app-add-new-task',
@@ -16,7 +16,9 @@ export class AddNewTaskPage implements OnInit {
   taskPriority
 
   taskObject
-  constructor(public modalCtrls: ModalController) { }
+  constructor(public modalCtrls: ModalController, public todoService: TodoService) {
+
+  }
 
   ngOnInit() {
   }
@@ -30,14 +32,22 @@ export class AddNewTaskPage implements OnInit {
     // nilai dari tasCategory di isi oleh categories ke [index] yang dikirim dari event click kategoriTerpilih
     // kemudian karena nilai telah ada baru dikirim ke home melalui event simpan()
   }
-  simpan() {
+  async simpan() {
     this.taskObject = ({
       itemName: this.taskName,
       itemDueDate: this.taskDate,
       itemCategory: this.taskCategory,
       itemPriority: this.taskPriority
     })
-
+    // console.log(this.taskObject);
+    let uid = this.taskName + this.taskDate
+    // key / uid dapat dilihat di console yang keluar dan sama
+    if (uid) {
+      await this.todoService.addTask(uid, this.taskObject)
+      // Jika uid yaitu taskname dan taskdate salah satu ada isi maka lakukan simpan
+    } else {
+      console.log("kosong");
+    }
     this.kembali()
     // disimpan pada taskObject kemudian nilai dari itemName di isi dari taskName, dst .Dimana item2 tersebut adalah variabel dari home.
   }

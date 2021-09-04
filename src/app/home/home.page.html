@@ -16,22 +16,22 @@
   <ion-card *ngFor="let item of todoList">
     <ion-card-header>
       <ion-card-subtitle
-        [style.color]="item.itemPriority === 'High' ? 'red' : (item.itemPriority === 'Low' ? 'green' : 'orange') ">
-        {{item.itemCategory}}
+        [style.color]="item.value.itemPriority === 'High' ? 'red' : (item.value.itemPriority === 'Low' ? 'green' : 'orange') ">
+        {{item.value.itemCategory}}
       </ion-card-subtitle>
       <!-- *ngFor untuk perulangan *ngIf untuk kondisi, kayanya :D  -->
       <ion-item>
-        <ion-icon *ngIf="item.itemPriority ==='High' " color="danger" size="small" name="ellipse"></ion-icon>
-        <ion-icon *ngIf="item.itemPriority ==='Low' " color="success" size="small" name="ellipse"></ion-icon>
-        <ion-icon *ngIf="item.itemPriority ==='Middle' " color="warning" size="small" name="ellipse"></ion-icon>
+        <ion-icon *ngIf="item.value.itemPriority ==='High' " color="danger" size="small" name="ellipse"></ion-icon>
+        <ion-icon *ngIf="item.value.itemPriority ==='Low' " color="success" size="small" name="ellipse"></ion-icon>
+        <ion-icon *ngIf="item.value.itemPriority ==='Middle' " color="warning" size="small" name="ellipse"></ion-icon>
         <ion-label>
-          {{item.itemName}}
+          {{item.value.itemName}}
         </ion-label>
       </ion-item>
 
     </ion-card-header>
     <ion-card-content>
-      <ion-label>Due date : <br> {{item.itemDueDate | date:'fullDate'}}</ion-label>
+      <ion-label>Due date : <br> {{item.value.itemDueDate | date:'fullDate'}}</ion-label>
       <!-- sama konsep dengan date diatas, hanya ini dinamic dari itemDueDate -->
     </ion-card-content>
 
@@ -44,7 +44,7 @@
         <ion-icon name="checkmark-outline"></ion-icon>
         <p>Complete</p>
       </ion-item>
-      <ion-item>
+      <ion-item button (click)="hapus(item.key)">
         <ion-icon name="trash-outline"></ion-icon>
         <p>Cencel</p>
       </ion-item>
