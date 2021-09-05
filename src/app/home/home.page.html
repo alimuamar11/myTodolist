@@ -37,12 +37,11 @@
 
     <ion-row>
       <ion-item>
-        <ion-icon name="share-outline"></ion-icon>
-        <p>Share</p>
-      </ion-item>
-      <ion-item>
         <ion-icon name="checkmark-outline"></ion-icon>
-        <p>Complete</p>
+      </ion-item>
+      <ion-item button (click)="ubah(item)">
+        <ion-icon name="create"></ion-icon>
+        <p>Update</p>
       </ion-item>
       <ion-item button (click)="hapus(item.key)">
         <ion-icon name="trash-outline"></ion-icon>
